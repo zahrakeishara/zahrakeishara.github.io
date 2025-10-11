@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zahra Keisha Rafifah | Portfolio</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
     * {
       margin: 0;
@@ -16,44 +16,116 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #0f172a;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #f8fafc;
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.1), transparent);
+      animation: float 20s infinite;
+    }
+
+    .circle:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .circle:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      top: 60%;
+      right: 15%;
+      animation-delay: 5s;
+    }
+
+    .circle:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      bottom: 10%;
+      left: 50%;
+      animation-delay: 10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(50px, -50px) scale(1.1); }
+      66% { transform: translate(-50px, 50px) scale(0.9); }
     }
 
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 15px 40px;
       z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.1);
     }
 
     header h1 {
-      color: #38bdf8;
-      font-size: 1.4rem;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.5rem;
       letter-spacing: 1px;
+      font-weight: 700;
     }
 
     nav a {
-      color: #f8fafc;
+      color: #cbd5e1;
       text-decoration: none;
       margin: 0 15px;
-      transition: 0.3s;
+      transition: all 0.3s;
+      position: relative;
+      font-weight: 500;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      transition: width 0.3s;
     }
 
     nav a:hover {
       color: #38bdf8;
     }
 
+    nav a:hover::after {
+      width: 100%;
+    }
+
     section {
       min-height: 100vh;
       padding: 100px 60px;
+      position: relative;
     }
 
     .hero {
@@ -65,113 +137,259 @@
     }
 
     .hero img {
-      width: 160px;
-      height: 160px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
-      border: 3px solid #38bdf8;
-      margin-bottom: 20px;
+      border: 4px solid transparent;
+      background: linear-gradient(#0f172a, #0f172a) padding-box,
+                  linear-gradient(135deg, #38bdf8, #818cf8) border-box;
+      margin-bottom: 30px;
       object-fit: cover;
+      animation: pulse 3s infinite;
+      box-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     .hero h2 {
-      color: #38bdf8;
-      font-size: 2.2rem;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      animation: slideDown 1s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero .subtitle {
+      font-size: 1.3rem;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      animation: slideDown 1s ease 0.2s backwards;
     }
 
     .hero p {
-      max-width: 600px;
+      max-width: 650px;
       color: #cbd5e1;
       margin-top: 15px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      animation: slideDown 1s ease 0.4s backwards;
+    }
+
+    .skills {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: slideDown 1s ease 0.6s backwards;
+    }
+
+    .skill-tag {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 8px 20px;
+      border-radius: 20px;
+      color: #38bdf8;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .skill-tag:hover {
+      background: rgba(56, 189, 248, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
     }
 
     h3.section-title {
       text-align: center;
-      color: #38bdf8;
-      margin-bottom: 40px;
-      font-size: 2rem;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 50px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      position: relative;
+    }
+
+    h3.section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      border-radius: 2px;
     }
 
     .timeline {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #38bdf8, transparent);
     }
 
     .timeline-item {
-      background-color: #1e293b;
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
-      transition: 0.3s;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      transition: all 0.4s;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -41px;
+      top: 30px;
+      width: 15px;
+      height: 15px;
+      background: #38bdf8;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
     }
 
     .timeline-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(56, 189, 248, 0.3);
+      border-color: #38bdf8;
     }
 
     .timeline-item h4 {
-      color: #f8fafc;
-      margin-bottom: 5px;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+      font-weight: 600;
     }
 
     .timeline-item small {
       color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .timeline-item p {
+      margin-top: 15px;
+      color: #cbd5e1;
     }
 
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1000px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
     .project-card {
-      background: #1e293b;
-      border-radius: 15px;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
-      transition: 0.3s;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      transition: all 0.4s;
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(129, 140, 248, 0.1));
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 1;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
     }
 
     .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 50px rgba(56, 189, 248, 0.4);
+      border-color: #38bdf8;
     }
 
     .project-card img {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.1);
     }
 
     .project-card .content {
-      padding: 20px;
+      padding: 25px;
+      position: relative;
+      z-index: 2;
     }
 
     .project-card h4 {
       color: #38bdf8;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .project-card p {
+      color: #cbd5e1;
+      margin-bottom: 15px;
     }
 
     .tech {
       color: #94a3b8;
       font-size: 0.9rem;
+      font-weight: 600;
     }
 
     footer {
-      background-color: #1e293b;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
       text-align: center;
-      padding: 30px;
+      padding: 40px;
       color: #94a3b8;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      border-top: 1px solid rgba(56, 189, 248, 0.2);
     }
 
-    /* Animasi fade-in */
     .fade-in {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
       transition: opacity 1s ease, transform 1s ease;
     }
 
@@ -179,9 +397,48 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      section {
+        padding: 80px 30px;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      h3.section-title {
+        font-size: 2rem;
+      }
+
+      .timeline::before {
+        left: 0;
+      }
+
+      .timeline-item::before {
+        left: -7px;
+      }
+
+      nav a {
+        margin: 0 10px;
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="bg-animation">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+
   <header>
     <h1>Zahra Keisha</h1>
     <nav>
@@ -194,11 +451,20 @@
 
   <!-- PROFIL -->
   <section id="profile" class="hero fade-in">
-    <img src="https://via.placeholder.com/160" alt="Foto Zahra" />
+    <img src="https://via.placeholder.com/180" alt="Foto Zahra" />
     <h2>Zahra Keisha Rafifah</h2>
-    <p>Seorang <b>Junior Web Developer</b> dari SMK Informatika Utama jurusan Rekayasa Perangkat Lunak. 
-       Tertarik dalam pengembangan website dengan HTML, CSS, Laravel, dan MySQL. 
-       Suka mengeksplor teknologi baru dan membuat tampilan web yang menarik dan interaktif.</p>
+    <p class="subtitle">Junior Web Developer</p>
+    <p>Seorang siswa SMK Informatika Utama jurusan Rekayasa Perangkat Lunak yang passionate dalam pengembangan website. 
+       Berpengalaman dengan HTML, CSS, Laravel, dan MySQL. 
+       Suka mengeksplor teknologi baru dan menciptakan pengalaman web yang menarik dan interaktif.</p>
+    <div class="skills">
+      <span class="skill-tag">HTML</span>
+      <span class="skill-tag">CSS</span>
+      <span class="skill-tag">JavaScript</span>
+      <span class="skill-tag">Laravel</span>
+      <span class="skill-tag">MySQL</span>
+      <span class="skill-tag">Web Design</span>
+    </div>
   </section>
 
   <!-- PENDIDIKAN -->
@@ -208,12 +474,12 @@
       <div class="timeline-item">
         <h4>SMK Informatika Utama</h4>
         <small>2023 – Sekarang</small>
-        <p>Jurusan Rekayasa Perangkat Lunak (RPL). Aktif mengikuti kegiatan sekolah, belajar pemrograman web dan database.</p>
+        <p>Jurusan Rekayasa Perangkat Lunak (RPL). Aktif mengikuti kegiatan sekolah, belajar pemrograman web dan database dengan fokus pada pengembangan aplikasi berbasis web modern.</p>
       </div>
       <div class="timeline-item">
-        <h4>SMP Negeri [Nama Sekolah]</h4>
+        <h4>SMP Negeri 17 Depok</h4>
         <small>2020 – 2023</small>
-        <p>Lulus dengan nilai baik dan aktif dalam kegiatan ekstrakurikuler sekolah.</p>
+        <p>Lulus dengan nilai baik dan aktif dalam kegiatan ekstrakurikuler sekolah. Mulai tertarik dengan dunia teknologi dan pemrograman.</p>
       </div>
     </div>
   </section>
@@ -225,7 +491,7 @@
       <div class="timeline-item">
         <h4>Sekretaris OSIS SMK Informatika Utama</h4>
         <small>Periode 2024 – 2025</small>
-        <p>Mengelola dokumen seperti proposal, laporan pertanggungjawaban, dan surat resmi sekolah.</p>
+        <p>Mengelola dokumen organisasi seperti proposal kegiatan, laporan pertanggungjawaban, dan surat resmi sekolah. Berkoordinasi dengan pengurus lain untuk kelancaran kegiatan OSIS.</p>
       </div>
     </div>
   </section>
@@ -235,20 +501,29 @@
     <h3 class="section-title">Portofolio Proyek</h3>
     <div class="portfolio-grid">
       <div class="project-card">
-        <img src="https://via.placeholder.com/400x180/1e293b/38bdf8?text=Online+Shop+HTML+CSS" alt="Screenshot Project 1">
+        <img src="https://via.placeholder.com/400x200/1e293b/38bdf8?text=Online+Shop" alt="Screenshot Project 1">
         <div class="content">
           <h4>Online Shop Static Website</h4>
-          <p>Website tampilan toko online sederhana menggunakan HTML dan CSS saja.</p>
+          <p>Website tampilan toko online sederhana dengan desain modern dan responsif menggunakan HTML dan CSS murni.</p>
           <p class="tech">Tech stack: HTML, CSS</p>
         </div>
       </div>
 
       <div class="project-card">
-        <img src="https://via.placeholder.com/400x180/1e293b/38bdf8?text=CRUD+Laravel+7" alt="Screenshot Project 2">
+        <img src="https://via.placeholder.com/400x200/1e293b/818cf8?text=CRUD+Laravel" alt="Screenshot Project 2">
         <div class="content">
           <h4>CRUD Data Management</h4>
-          <p>Aplikasi manajemen data kategori, produk, dan pelanggan berbasis Laravel 7 dan MySQL.</p>
+          <p>Aplikasi manajemen data kategori, produk, dan pelanggan berbasis Laravel 7 dengan fitur lengkap dan antarmuka user-friendly.</p>
           <p class="tech">Tech stack: Laravel 7, MySQL, HTML, CSS</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400x200/1e293b/f472b6?text=Aplikasi+Kasir" alt="Screenshot Project 3">
+        <div class="content">
+          <h4>Aplikasi Kasir Sederhana</h4>
+          <p>Aplikasi kasir interaktif dengan fitur perhitungan otomatis, manajemen produk, dan struk pembayaran menggunakan JavaScript murni.</p>
+          <p class="tech">Tech stack: JavaScript, HTML, CSS</p>
         </div>
       </div>
     </div>
@@ -256,19 +531,27 @@
 
   <footer>
     <p>© 2025 Zahra Keisha Rafifah | Junior Web Developer</p>
+    <p style="margin-top: 10px; color: #64748b;">Made with 💙 and passion for web development</p>
   </footer>
 
   <script>
-    // animasi fade-in saat scroll
     const faders = document.querySelectorAll('.fade-in');
-    window.addEventListener('scroll', () => {
-      const triggerBottom = window.innerHeight * 0.85;
-      faders.forEach(el => {
-        const boxTop = el.getBoundingClientRect().top;
-        if (boxTop < triggerBottom) {
-          el.classList.add('show');
+    
+    const appearOptions = {
+      threshold: 0.2,
+      rootMargin: "0px 0px -100px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
         }
       });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
     });
   </script>
 </body>
