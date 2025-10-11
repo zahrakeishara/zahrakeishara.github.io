@@ -414,6 +414,85 @@
       font-weight: 600;
     }
 
+    /* Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 0 50px rgba(168, 85, 247, 0.5);
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+      z-index: 10000;
+    }
+
+    .lightbox-close:hover {
+      color: #a855f7;
+    }
+
+    .clickable-img {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .clickable-img::after {
+      content: '🔍';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(168, 85, 247, 0.8);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .clickable-img:hover::after {
+      opacity: 1;
+    }
+
     /* Footer */
     footer {
       background: rgba(168, 85, 247, 0.05);
@@ -592,8 +671,8 @@
     </div>
     <div class="portfolio-container">
       <div class="project-item">
-        <div class="project-img">
-          <img src="https://i.imgur.com/ZCBglJl.png" alt="Sertifikat HTML">
+        <div class="project-img clickable-img">
+          <img src="https://i.imgur.com/ZCBglJl.png" alt="Sertifikat HTML" onclick="openLightbox(this.src)">
         </div>
         <div class="project-info">
           <h4>Introduction to HTML</h4>
@@ -602,8 +681,8 @@
         </div>
       </div>
       <div class="project-item">
-        <div class="project-img">
-          <img src="https://i.imgur.com/gA3B37v.png" alt="Sertifikat CSS">
+        <div class="project-img clickable-img">
+          <img src="https://i.imgur.com/gA3B37v.png" alt="Sertifikat CSS" onclick="openLightbox(this.src)">
         </div>
         <div class="project-info">
           <h4>Introduction to CSS</h4>
@@ -622,8 +701,8 @@
     </div>
     <div class="portfolio-container">
       <div class="project-item">
-        <div class="project-img">
-          <img src="https://via.placeholder.com/400x220/1a0b2e/a855f7?text=Online+Shop" alt="Screenshot Project 1">
+        <div class="project-img clickable-img">
+          <img src="https://via.placeholder.com/400x220/1a0b2e/a855f7?text=Online+Shop" alt="Screenshot Project 1" onclick="openLightbox(this.src)">
         </div>
         <div class="project-info">
           <h4>Online Shop Static Website</h4>
@@ -633,8 +712,8 @@
       </div>
 
       <div class="project-item">
-        <div class="project-img">
-          <img src="https://via.placeholder.com/400x220/1a0b2e/ec4899?text=CRUD+Laravel" alt="Screenshot Project 2">
+        <div class="project-img clickable-img">
+          <img src="https://via.placeholder.com/400x220/1a0b2e/ec4899?text=CRUD+Laravel" alt="Screenshot Project 2" onclick="openLightbox(this.src)">
         </div>
         <div class="project-info">
           <h4>CRUD Data Management</h4>
@@ -644,8 +723,8 @@
       </div>
 
       <div class="project-item">
-        <div class="project-img">
-          <img src="https://i.imgur.com/d0D4Pvr.png" alt="Screenshot Project 3">
+        <div class="project-img clickable-img">
+          <img src="https://i.imgur.com/d0D4Pvr.png" alt="Screenshot Project 3" onclick="openLightbox(this.src)">
         </div>
         <div class="project-info">
           <h4>Aplikasi Kasir Sederhana</h4>
@@ -661,7 +740,35 @@
     <p>Made with 💜 and passion for web development</p>
   </footer>
 
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+  </div>
+
   <script>
+    // Lightbox functions
+    function openLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+
     // Create floating particles
     function createParticles() {
       for (let i = 0; i < 30; i++) {
